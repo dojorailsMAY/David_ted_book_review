@@ -9,6 +9,7 @@ class NovelsController < ApplicationController
   end
 
   def show
+    @novel = Novel.find(params[:id])
   end
 
   def new
@@ -23,10 +24,10 @@ class NovelsController < ApplicationController
       @book = Novel.new(title:params[:novel_title],author:Author.find(@auth.id))
       if @book.valid?
         @book.save
-        @review = Review.new(title:params[:review_title],user:User.find(session[:id]),book:Book.find(@book.id))
+        @review = Review.new(title:params[:review_title],user:User.find(session[:id]),novel:Novel.find(@book.id))
         if @review.valid?
           @review.save
-          redirect_to '/'
+          redirect_to "/novels/#{@book.id}/show"
         end
       end
     else

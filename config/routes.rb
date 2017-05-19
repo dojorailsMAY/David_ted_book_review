@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'novels#index'
 
-  get 'novels/show'
+  get 'novels/:id/show' => 'novels#show'
 
   get 'novels/new' => 'novels#new'
 
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'users/create' => 'users#create'
 
   get 'users/logout' => 'users#logout'
+
 
 
   
