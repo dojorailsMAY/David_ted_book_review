@@ -1,0 +1,6 @@
+<h1>Welcome to Novelty <%= @user %></h1>
+<a href="/novels/new">Add a Novel and Review</a><br>
+<a href="/users/logout">logout</a><br>
+<% @books.each do |book| %>
+    <h2 id="book"><%= book.title %></h2>
+<% end %>

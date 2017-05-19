@@ -1,0 +1,35 @@
+<div class="header">
+    <h1>Add a new novel and review!</h1>
+    </div>
+    <div class="header">
+    <a href="/">Home</a>
+    <a href="/users/logout">logout</a>
+    </div><br>
+<form action="/novels/create" method = "POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    
+    <input type="text" name="novel_title" placeholder="Novel" id="novel"><br>
+    
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<select name="author" class="author">
+            <option selected='selected' disabled>Select from existing authors</option>
+        <% @authors.each do |author| %>
+            <option value='<%= author.id %>'><%= author.name %></option>
+        <% end %>
+        
+    </select><br>
+
+    Or: <input type="text" name="author_name" placeholder="Add new Author" class="author"><br>
+    
+    <textarea rows="4" cols='50' name='title_review' placeholder="Review"></textarea><br>
+    
+    Rating:<br>
+    <select name="rating" id="rating">
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+    </select><br>
+    <input type="submit" value="Submit Novel and Review"><br>
+</form>
+
