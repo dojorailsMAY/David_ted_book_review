@@ -1,8 +1,16 @@
 class UsersController < ApplicationController
 
     def login_reg
+        if session[:id].nil?
+            render 'login_reg'
+        else 
+            redirect_to '/'
+        end
     end
-
+    def show
+        @profile = User.find(params[:id])
+        @reviews = User.find(params[:id]).reviews
+    end
     def login
        @user = User.find_by_email(params[:email]).try(:authenticate,params[:password])
        puts @user

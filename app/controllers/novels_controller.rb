@@ -1,15 +1,19 @@
 class NovelsController < ApplicationController
+
   def index
     if session[:id].nil?
       redirect_to '/users'
     else
       @user = session[:name]
       @books = Novel.all
+      @update = Novel.order(created_at: :desc).limit(3)
+      puts @update
     end
   end
 
   def show
     @novel = Novel.find(params[:id])
+    @reviews = Review.where(novel_id: params[:id])
   end
 
   def new
@@ -24,7 +28,7 @@ class NovelsController < ApplicationController
       @book = Novel.new(title:params[:novel_title],author:Author.find(@auth.id))
       if @book.valid?
         @book.save
-        @review = Review.new(title:params[:review_title],user:User.find(session[:id]),novel:Novel.find(@book.id))
+        @review = Review.new(title:params[:title_review],user:User.find(session[:id]),novel:Novel.find(@book.id),rating:params[:rating])
         if @review.valid?
           @review.save
           redirect_to "/novels/#{@book.id}/show"

@@ -13,8 +13,11 @@ Rails.application.routes.draw do
 
   post 'users/create' => 'users#create'
 
+  get 'users/:id/show' => 'users#show'
+
   get 'users/logout' => 'users#logout'
 
+  post 'reviews/:id/create' => 'reviews#create'
 
 
   

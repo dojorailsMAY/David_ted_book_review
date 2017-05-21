@@ -1,0 +1,13 @@
+<h1><%= @profile.username %></h1>
+<a href="/">Home</a>
+<a href="/users/logout">logout</a>
+
+<h4>Name: <%= @profile.name %></h4>
+<h4>Email: <%= @profile.email %></h4>
+<h4><%=  %></h4>
+<hr> <hr>
+<h3>Posted reviews on the following books</h3>
+
+<% @reviews.each do |review| %>
+    <p><%= review.title %></p>
+<% end %>
