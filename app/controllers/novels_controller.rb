@@ -6,8 +6,7 @@ class NovelsController < ApplicationController
     else
       @user = session[:name]
       @books = Novel.all
-      @update = Novel.order(created_at: :desc).limit(3)
-      puts @update
+      @update = Review.order(created_at: :desc).limit(3).includes(:user,:novel)
     end
   end
 
@@ -21,23 +20,23 @@ class NovelsController < ApplicationController
   end
 
   def create
-    @auth = Author.new(name:params[:author_name])
-
-    if @auth.valid?
-      @auth.save
-      @book = Novel.new(title:params[:novel_title],author:Author.find(@auth.id))
-      if @book.valid?
-        @book.save
-        @review = Review.new(title:params[:title_review],user:User.find(session[:id]),novel:Novel.find(@book.id),rating:params[:rating])
-        if @review.valid?
-          @review.save
-          redirect_to "/novels/#{@book.id}/show"
+    @author = Author.find_by_name(params[:author_name])
+    @author = Author.create(name:params[:author]) if @author.nil?
+    # if @author.valid?
+    puts @author
+      @book = Novel.new(title:params[:novel_title],author:Author.find(@author))
+        if @book.valid?
+          @book.save
+          @review = Review.new(title:params[:title_review],user:User.find(session[:id]),novel:Novel.find(@book.id),rating:params[:rating])
+          if @review.valid?
+            @review.save
+            redirect_to "/novels/#{@book.id}/show"
+          end
+        else
+          # flash[:errors]= ["ERROR:404"]
+          redirect_to '/novels/new'
         end
-      end
-    else
-      # flash[:errors]= ["ERROR:404"]
-      redirect_to '/novels/new'
-    end
+      # end
   end
 
   # private 

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     end
     def show
         @profile = User.find(params[:id])
-        @reviews = User.find(params[:id]).reviews
+        @reviews = Review.joins(:novel).where('user_id = ?',params[:id]).select("*")
     end
     def login
        @user = User.find_by_email(params[:email]).try(:authenticate,params[:password])

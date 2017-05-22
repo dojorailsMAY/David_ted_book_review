@@ -1,14 +1,16 @@
 <h1>Welcome to Novelty <%= @user %></h1>
 <a href="/novels/new">Add a Novel and Review</a><br>
 <a href="/users/logout">logout</a><br>
-<hr>
-<h4>Lastest Reviewed:</h4>
+<hr><hr>
+<h4>Lastest novel reviewed:</h4>
     <ol>
         <% @update.each do |books|  %>
-            <li><a href="/novels/<%= books.id %>/show"><%= books.title %></a></li><br>
+            <li><h2><a href="/novels/<%= books.novel.id %>/show"><%= books.novel.title %></a></h2></li>
+            <p><a href="/users/<%= books.user.id %>/show"><%= books.user.username %>&nbsp </a>says: <%= books.title %></p>
+            <p>Rating: <%= books.rating %>/5</p>
         <% end %>
     </ol>
-<hr>
+<hr><hr>
 <% @books.each do |book| %>
     <h2 id="book"> <a href="/novels/<%= book.id %>/show"><%= book.title %></a> </h2>
 <% end %>

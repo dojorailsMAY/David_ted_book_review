@@ -32,7 +32,11 @@ Add a review:
 <hr><hr>
 
 <% @reviews.each do |review|  %>
-   <p> Review: <%= review.title  %></p>
+   <p> Review: <%= review.title  %>
+        <% if session[:id] == review.user.id %>
+        <a href="/novels/<%= review.novel.id %>/reviews/<%= review.id %>/delete">delete</a>
+        <% end %>
+   </p>
    <p> Rating:<%= review.rating %>/5</p>
    <p> <%= review.created_at.strftime("%b %d, %Y") %></p>
    <p> By:<a href="/users/<%= review.user.id %>/show"><%= review.user.username %></a></p>

@@ -4,21 +4,21 @@
     <div class="header">
     <a href="/">Home</a>
     <a href="/users/logout">logout</a>
-    </div><br>
+</div><br>
+
 <form action="/novels/create" method = "POST">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    
     <input type="text" name="novel_title" placeholder="Novel" id="novel"><br>
     
-    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<select name="author" class="author">
-            <option selected='selected' disabled>Select from existing authors</option>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <select name="author_name" class="author">
+        <option selected disabled>Authors</option>
         <% @authors.each do |author| %>
-            <option value='<%= author.id %>'><%= author.name %></option>
+            <option value='<%= author.name %>'><%= author.name %></option>
         <% end %>
-        
     </select><br>
 
-    Or: <input type="text" name="author_name" placeholder="Add new Author" class="author"><br>
+    Or: <input type="text" name="author" placeholder="Add new Author" class="author"><br>
     
     <textarea rows="4" cols='50' name='title_review' placeholder="Review"></textarea><br>
     

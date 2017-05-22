@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   post 'reviews/:id/create' => 'reviews#create'
 
+  delete 'novels/:book_id/reviews/:id/delete' => 'reviews#destroy'
+
 
   
 

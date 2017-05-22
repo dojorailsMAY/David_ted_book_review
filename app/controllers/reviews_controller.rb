@@ -9,7 +9,10 @@ class ReviewsController < ApplicationController
             flash[:errors] = ['Review is too short']
             redirect_to "/novels/#{params[:id]}/show"
         end
-        
     end
 
+    def destory 
+        Review.find(params[:id]).destroy
+        redirect_to "/novels/#{params[:book_id]}/reviews/#{params[:id]}/delete"
+    end   
 end
